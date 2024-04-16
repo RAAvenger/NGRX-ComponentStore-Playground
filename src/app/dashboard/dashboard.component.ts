@@ -7,19 +7,26 @@ import {
   GridsterItemComponent,
   GridType,
 } from 'angular-gridster2';
+import { NgForOf } from '@angular/common';
+import { DashboardFrameComponent } from './dashboard-frame/dashboard-frame.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [GridsterComponent, GridsterItemComponent],
+  imports: [
+    GridsterComponent,
+    GridsterItemComponent,
+    NgForOf,
+    DashboardFrameComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   options: GridsterConfig = {
     gridType: GridType.Fixed,
-    fixedColWidth: 105,
-    fixedRowHeight: 105,
+    fixedColWidth: 200,
+    fixedRowHeight: 200,
 
     displayGrid: DisplayGrid.Always,
   };
