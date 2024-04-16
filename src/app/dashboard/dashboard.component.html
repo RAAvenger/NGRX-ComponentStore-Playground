@@ -1,5 +1,5 @@
 <gridster [options]="options">
   <gridster-item [item]="item" *ngFor="let item of dashboard">
-    <app-dashboard-frame></app-dashboard-frame>
+    <app-dashboard-frame [frameData]="item['frameData']"></app-dashboard-frame>
   </gridster-item>
 </gridster>

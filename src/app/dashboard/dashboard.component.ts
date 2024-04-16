@@ -31,6 +31,7 @@ export class DashboardComponent {
     displayGrid: DisplayGrid.Always,
   };
   dashboard: Array<GridsterItem> = [
-    { cols: 2, rows: 2, y: 0, x: 0, lable: 'some label' },
+    { cols: 2, rows: 2, y: 0, x: 0, frameData: { id: 'frame 1' } },
+    { cols: 2, rows: 2, y: 0, x: 2, frameData: { id: 'frame 2' } },
   ];
 }
