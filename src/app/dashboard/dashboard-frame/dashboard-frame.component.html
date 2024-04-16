@@ -1,3 +1,8 @@
 <div class="frame">
   <span>{{ frameData.id }}</span>
+  <input
+    [ngModel]="parameterLabel"
+    (ngModelChange)="changeParameterLabel($event)"
+    placeholder="parameter place holder"
+  />
 </div>
