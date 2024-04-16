@@ -3,7 +3,7 @@ import { FrameData } from './dtos/frame-data';
 import { FormsModule } from '@angular/forms';
 import { DashboardStore } from '../store/dashboard.store';
 import { parameterState } from '../store/dtos/parameter.state';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-frame',
@@ -16,11 +16,10 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
   @Input({ required: true })
   public frameData!: FrameData;
   protected parameterLabel: string | undefined;
-  private readonly parameterSubscription: Subscription;
-  private readonly $destroy = new Subject();
+  private readonly $destroy = new Subject<void>();
 
   constructor(private readonly dashboardStore: DashboardStore) {
-    this.parameterSubscription = this.dashboardStore.parameters$
+    this.dashboardStore.parameters$
       .pipe(takeUntil(this.$destroy))
       .subscribe(
         (changedParameters) =>
@@ -37,6 +36,7 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy(): void {
+    this.$destroy.next();
     this.$destroy.complete();
   }
 

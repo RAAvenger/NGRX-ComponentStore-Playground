@@ -15,6 +15,7 @@ const parameterId1 = '1';
 
 const parameterId2 = '2';
 const parameterId3 = '3';
+const parameterId4 = '4';
 
 @Component({
   selector: 'app-dashboard',
@@ -59,6 +60,13 @@ export class DashboardComponent implements OnInit {
       x: 2,
       frameData: { id: 'frame 3', parameterId: parameterId3 },
     },
+    {
+      cols: 2,
+      rows: 2,
+      y: 0,
+      x: 2,
+      frameData: { id: 'frame 4', parameterId: parameterId4 },
+    },
   ];
 
   constructor(private readonly dashboardStore: DashboardStore) {}
@@ -69,8 +77,8 @@ export class DashboardComponent implements OnInit {
       secondId: parameterId2,
     });
     this.dashboardStore.addParameterRelation({
-      firstId: parameterId2,
-      secondId: parameterId3,
+      firstId: parameterId3,
+      secondId: parameterId4,
     });
   }
 }
