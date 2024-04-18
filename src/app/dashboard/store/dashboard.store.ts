@@ -13,6 +13,7 @@ export class DashboardStore extends ComponentStore<DashboardState> {
       return { ...state, parameters: [...state.parameters, parameter] };
     },
   );
+
   public readonly addParameterRelation = this.updater(
     (state: DashboardState, parameterRelation: ParameterRelationState) => {
       return {
@@ -21,15 +22,19 @@ export class DashboardStore extends ComponentStore<DashboardState> {
       };
     },
   );
+
   private readonly parametersObserver$: Observable<parameterState[]> =
     this.select((x) => x.parameters);
+
   private readonly relationsObserver$: Observable<ParameterRelationState[]> =
     this.select((x) => x.parameterRelations);
+
   public readonly parameters$: Observable<parameterState[]> = this.select(
     this.parametersObserver$,
     this.relationsObserver$,
     (parameters: parameterState[]) => parameters,
   );
+
   private readonly updateParameterValue = this.updater(
     (state: DashboardState, parameter: parameterState) => {
       return {
@@ -44,6 +49,7 @@ export class DashboardStore extends ComponentStore<DashboardState> {
       };
     },
   );
+
   public readonly setParameterValue = this.effect(
     (parameter$: Observable<SetParameterValueRequest>) => {
       return parameter$.pipe(

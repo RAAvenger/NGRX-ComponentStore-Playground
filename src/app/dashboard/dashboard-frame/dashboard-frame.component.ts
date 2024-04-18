@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FrameData } from './dtos/frame-data';
 import { FormsModule } from '@angular/forms';
-import { DashboardStore } from '../store/dashboard.store';
 import { parameterState } from '../store/dtos/parameter.state';
 import { Subject, takeUntil } from 'rxjs';
+import { DashboardFrameStore } from './store/dashboard-frame.store';
 
 @Component({
   selector: 'app-dashboard-frame',
@@ -18,8 +18,8 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
   protected parameterLabel: string | undefined;
   private readonly $destroy = new Subject<void>();
 
-  constructor(private readonly dashboardStore: DashboardStore) {
-    this.dashboardStore.parameters$
+  constructor(private readonly dashboardFrameStore: DashboardFrameStore) {
+    this.dashboardFrameStore.parameters$
       .pipe(takeUntil(this.$destroy))
       .subscribe(
         (changedParameters) =>
@@ -29,7 +29,7 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     if (this.hasParameter())
-      this.dashboardStore.addParameter({
+      this.dashboardFrameStore.addParameter({
         id: this.frameData.parameterId,
         value: '',
       });
@@ -42,7 +42,7 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
 
   protected changeParameterLabel(newLabel: string) {
     if (this.hasParameter()) {
-      this.dashboardStore.setParameterValue({
+      this.dashboardFrameStore.setParameterValue({
         id: this.frameData.parameterId,
         value: newLabel,
       });
