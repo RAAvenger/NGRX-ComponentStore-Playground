@@ -9,6 +9,7 @@ import { DashboardFrameStore } from './store/dashboard-frame.store';
   selector: 'app-dashboard-frame',
   standalone: true,
   imports: [FormsModule],
+  providers: [DashboardFrameStore],
   templateUrl: './dashboard-frame.component.html',
   styleUrl: './dashboard-frame.component.scss',
 })
@@ -21,10 +22,13 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
   constructor(private readonly dashboardFrameStore: DashboardFrameStore) {
     this.dashboardFrameStore.parameters$
       .pipe(takeUntil(this.$destroy))
-      .subscribe(
-        (changedParameters) =>
-          (this.parameterLabel = this.getParameterLabel(changedParameters)),
-      );
+      .subscribe((changedParameters) => {
+        this.parameterLabel = this.getParameterLabel(changedParameters);
+        console.log({
+          parameters: changedParameters,
+          frameId: this.frameData.id,
+        });
+      });
   }
 
   ngOnInit(): void {

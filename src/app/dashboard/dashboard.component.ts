@@ -80,9 +80,9 @@ export class DashboardComponent implements OnInit {
       firstId: parameterId3,
       secondId: parameterId4,
     });
-    this.dashboardStore.addParameterRelation({
-      firstId: parameterId1,
-      secondId: parameterId4,
-    });
+    // this.dashboardStore.addParameterRelation({
+    //   firstId: parameterId1,
+    //   secondId: parameterId4,
+    // });
   }
 }
