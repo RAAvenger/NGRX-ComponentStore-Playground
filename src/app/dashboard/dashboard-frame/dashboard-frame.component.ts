@@ -19,24 +19,24 @@ export class DashboardFrameComponent implements OnDestroy, OnInit {
   protected parameterLabel: string | undefined;
   private readonly $destroy = new Subject<void>();
 
-  constructor(private readonly dashboardFrameStore: DashboardFrameStore) {
-    this.dashboardFrameStore.parameters$
-      .pipe(takeUntil(this.$destroy))
-      .subscribe((changedParameters) => {
-        this.parameterLabel = this.getParameterLabel(changedParameters);
-        console.log({
-          parameters: changedParameters,
-          frameId: this.frameData.id,
-        });
-      });
-  }
+  constructor(private readonly dashboardFrameStore: DashboardFrameStore) {}
 
   ngOnInit(): void {
-    if (this.hasParameter())
+    if (this.hasParameter()) {
       this.dashboardFrameStore.addParameter({
         id: this.frameData.parameterId,
         value: '',
       });
+      this.dashboardFrameStore.parameters$
+        .pipe(takeUntil(this.$destroy))
+        .subscribe((changedParameters) => {
+          this.parameterLabel = this.getParameterLabel(changedParameters);
+          console.log({
+            parameters: changedParameters,
+            frameId: this.frameData.id,
+          });
+        });
+    }
   }
 
   ngOnDestroy(): void {
